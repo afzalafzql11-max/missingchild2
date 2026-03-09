@@ -1,64 +1,164 @@
 body{
 
-font-family:Arial;
-background:#f4f4f4;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg,#6a11cb,#2575fc);
 text-align:center;
 margin:0;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 
 }
+
+
+/* TITLE */
 
 .title{
 
-background:#007bff;
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.2);
 color:white;
-padding:20px;
+padding:18px;
+font-size:28px;
+font-weight:bold;
+letter-spacing:1px;
+backdrop-filter: blur(8px);
 
 }
+
+
+/* MAIN BOX */
 
 .container{
 
 width:400px;
-margin:auto;
-margin-top:40px;
-padding:25px;
+padding:30px;
 
-background:white;
+background:rgba(255,255,255,0.15);
 
-border-radius:10px;
+border-radius:15px;
 
-box-shadow:0px 0px 10px gray;
+backdrop-filter: blur(10px);
+
+box-shadow:0px 8px 30px rgba(0,0,0,0.3);
+
+animation:fadeIn 0.6s ease;
 
 }
+
+
+/* INPUT */
 
 input{
 
-width:90%;
-padding:10px;
+width:92%;
+padding:12px;
 margin:10px;
 
+border-radius:8px;
+border:none;
+
+outline:none;
+
+background:rgba(255,255,255,0.8);
+
+font-size:14px;
+
+transition:0.3s;
+
 }
+
+input:focus{
+
+background:white;
+
+box-shadow:0 0 5px #2575fc;
+
+transform:scale(1.02);
+
+}
+
+
+/* BUTTON */
 
 button{
 
 width:95%;
 padding:12px;
-margin:8px;
+margin:10px;
 
-background:#007bff;
+background:linear-gradient(45deg,#2575fc,#6a11cb);
+
 color:white;
+
 border:none;
+
+border-radius:8px;
+
+font-size:15px;
+
 cursor:pointer;
+
+transition:0.3s;
 
 }
 
 button:hover{
 
-background:#0056b3;
+transform:scale(1.05);
+
+box-shadow:0px 5px 15px rgba(0,0,0,0.4);
 
 }
+
+
+/* PAGE SWITCH */
 
 .page{
 
 display:none;
+
+}
+
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0px);
+
+}
+
+}
+
+
+/* MOBILE */
+
+@media (max-width:500px){
+
+.container{
+
+width:90%;
+
+}
+
+.title{
+
+font-size:22px;
+
+}
 
 }
