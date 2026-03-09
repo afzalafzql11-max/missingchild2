@@ -1,3 +1,4 @@
+```javascript
 const API = "https://missingchild1.onrender.com";
 
 
@@ -19,6 +20,12 @@ setTimeout(()=>{
 current.style.opacity=1;
 current.style.transition="0.4s";
 },50);
+
+/* LOAD CHILDREN WHEN DASHBOARD OPENS */
+
+if(page==="dashboard"){
+loadChildren();
+}
 
 }
 
@@ -307,6 +314,50 @@ console.log(err);
 }
 
 
+/* ---------------- LOAD REGISTERED CHILDREN ---------------- */
+
+function loadChildren(){
+
+fetch(API + "/get_children")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let container=document.getElementById("childrenContainer");
+
+if(!container) return;
+
+container.innerHTML="";
+
+data.forEach(child=>{
+
+let card=document.createElement("div");
+
+card.className="childCard";
+
+card.innerHTML=
+
+"<h4>"+child.name+"</h4>"+
+"<p>Age: "+child.age+"</p>"+
+"<p>Place: "+child.place+"</p>"+
+"<img src='"+API+"/"+child.image+"' width='120'>";
+
+container.appendChild(card);
+
+});
+
+})
+
+.catch(err=>{
+
+console.log("Error loading children",err);
+
+});
+
+}
+
+
 /* ---------------- IMAGE PREVIEW ---------------- */
 
 function previewImage(input,id){
@@ -328,3 +379,4 @@ reader.readAsDataURL(file);
 }
 
 }
+```
