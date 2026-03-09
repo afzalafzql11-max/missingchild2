@@ -1,90 +1,53 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Missing Link System</title>
 
-<style>
-
-body{
-font-family:Arial;
-background:#f2f2f2;
-margin:0;
-padding:0;
-text-align:center;
-}
-
-.container{
-width:400px;
-margin:auto;
-margin-top:60px;
-background:white;
-padding:30px;
-border-radius:10px;
-box-shadow:0px 0px 10px gray;
-}
-
-input,button{
-width:90%;
-padding:10px;
-margin:8px;
-}
-
-button{
-background:#007bff;
-color:white;
-border:none;
-cursor:pointer;
-}
-
-button:hover{
-background:#0056b3;
-}
-
-.page{
-display:none;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<!-- SIGNUP PAGE -->
+<h1 class="title">Missing Link System</h1>
 
-<div class="container page" id="signup">
-<h2>Create Account</h2>
-
-<input type="text" id="su_name" placeholder="Name">
-
-<input type="email" id="su_email" placeholder="Email">
-
-<input type="password" id="su_pass" placeholder="Password">
-
-<button onclick="signup()">Signup</button>
-
-<p>Already have account?</p>
-
-<button onclick="showPage('login')">Login</button>
-</div>
-
-
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
 <div class="container page" id="login">
 
 <h2>Login</h2>
 
-<input type="email" id="li_email" placeholder="Email">
-
-<input type="password" id="li_pass" placeholder="Password">
+<input id="login_email" type="email" placeholder="Email">
+<input id="login_pass" type="password" placeholder="Password">
 
 <button onclick="login()">Login</button>
 
 <p>No account?</p>
 
-<button onclick="showPage('signup')">Create Account</button>
+<button onclick="showPage('signup')">Signup</button>
+
+</div>
+
+
+<!-- SIGNUP -->
+
+<div class="container page" id="signup">
+
+<h2>Create Account</h2>
+
+<input id="su_name" type="text" placeholder="Name">
+<input id="su_email" type="email" placeholder="Email">
+<input id="su_pass" type="password" placeholder="Password">
+
+<button onclick="signup()">Create Account</button>
+
+<p>Already have account?</p>
+
+<button onclick="showPage('login')">Login</button>
 
 </div>
 
@@ -93,7 +56,7 @@ display:none;
 
 <div class="container page" id="dashboard">
 
-<h2>Missing Link Dashboard</h2>
+<h2>Dashboard</h2>
 
 <button onclick="showPage('register')">
 Register Missing Child
@@ -112,13 +75,11 @@ Cross Check Photo
 
 <h2>Register Missing Child</h2>
 
-<input type="text" id="child_name" placeholder="Child Name">
+<input id="child_name" type="text" placeholder="Child Name">
+<input id="child_age" type="number" placeholder="Age">
+<input id="child_place" type="text" placeholder="Missing Place">
 
-<input type="number" id="child_age" placeholder="Age">
-
-<input type="text" id="child_place" placeholder="Missing Place">
-
-<input type="file" id="child_photo">
+<input id="child_photo" type="file">
 
 <button onclick="registerChild()">Submit</button>
 
@@ -127,22 +88,22 @@ Cross Check Photo
 </div>
 
 
-<!-- CROSS CHECK -->
+<!-- CROSSCHECK -->
 
 <div class="container page" id="crosscheck">
 
 <h2>Cross Check Photo</h2>
 
-<input type="file" id="check_photo">
+<input id="check_photo" type="file">
 
-<button onclick="crossCheck()">Check Match</button>
+<button onclick="crossCheck()">Check</button>
 
 <button onclick="showPage('dashboard')">Back</button>
 
 </div>
 
 
-<!-- RESULT PAGE -->
+<!-- RESULT -->
 
 <div class="container page" id="result">
 
@@ -150,184 +111,12 @@ Cross Check Photo
 
 <div id="family_details"></div>
 
-<button onclick="showPage('dashboard')">Back to Dashboard</button>
+<button onclick="showPage('dashboard')">Back</button>
 
 </div>
 
 
-
-<script>
-
-function showPage(page){
-
-document.querySelectorAll(".page").forEach(p=>{
-p.style.display="none"
-})
-
-document.getElementById(page).style.display="block"
-
-}
-
-showPage("login")
-
-
-/* SIGNUP */
-
-function signup(){
-
-fetch("/signup",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-name:document.getElementById("su_name").value,
-email:document.getElementById("su_email").value,
-password:document.getElementById("su_pass").value
-
-})
-
-})
-
-.then(res=>res.json())
-.then(data=>{
-
-alert(data.message)
-showPage("login")
-
-})
-
-}
-
-
-/* LOGIN */
-
-function login(){
-
-fetch("/login",{
-
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-email:document.getElementById("li_email").value,
-password:document.getElementById("li_pass").value
-
-})
-
-})
-
-.then(res=>res.json())
-.then(data=>{
-
-if(data.status=="success"){
-
-showPage("dashboard")
-
-}else{
-
-alert("Login Failed")
-
-}
-
-})
-
-}
-
-
-
-/* REGISTER CHILD */
-
-function registerChild(){
-
-let formData=new FormData()
-
-formData.append("name",
-document.getElementById("child_name").value)
-
-formData.append("age",
-document.getElementById("child_age").value)
-
-formData.append("place",
-document.getElementById("child_place").value)
-
-formData.append("photo",
-document.getElementById("child_photo").files[0])
-
-
-fetch("/register_child",{
-
-method:"POST",
-
-body:formData
-
-})
-
-.then(res=>res.json())
-.then(data=>{
-
-alert(data.message)
-
-})
-
-}
-
-
-
-/* CROSS CHECK */
-
-function crossCheck(){
-
-let formData=new FormData()
-
-formData.append("photo",
-document.getElementById("check_photo").files[0])
-
-
-fetch("/crosscheck",{
-
-method:"POST",
-
-body:formData
-
-})
-
-.then(res=>res.json())
-.then(data=>{
-
-showPage("result")
-
-if(data.status=="found"){
-
-document.getElementById("result_text").innerHTML="MATCH FOUND"
-
-document.getElementById("family_details").innerHTML=
-
-"Name: "+data.name+"<br>"+
-"Age: "+data.age+"<br>"+
-"Place: "+data.place
-
-}
-
-else{
-
-document.getElementById("result_text").innerHTML="NOT FOUND"
-
-}
-
-})
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
