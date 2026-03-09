@@ -1,126 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Missing Link System</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
 
 <h1 class="title">Missing Link System</h1>
 
 <!-- LOGIN -->
-
 <div class="container page" id="login">
-
-<h2>Login</h2>
-
-<input id="login_email" type="email" placeholder="Email">
-<input id="login_pass" type="password" placeholder="Password">
-
-<button type="button" onclick="login(event)">Login</button>
-
-<p>No account?</p>
-
-<button type="button" onclick="showPage('signup')">Signup</button>
-
+  <h2>Login</h2>
+  <input id="login_email" type="email" placeholder="Email">
+  <input id="login_pass" type="password" placeholder="Password">
+  <button type="button" onclick="login(event)">Login</button>
+  <p>No account?</p>
+  <button type="button" onclick="showPage('signup')">Signup</button>
 </div>
-
 
 <!-- SIGNUP -->
-
 <div class="container page" id="signup">
-
-<h2>Create Account</h2>
-
-<input id="su_name" type="text" placeholder="Name">
-<input id="su_email" type="email" placeholder="Email">
-<input id="su_pass" type="password" placeholder="Password">
-
-<button type="button" onclick="signup(event)">Create Account</button>
-
-<p>Already have account?</p>
-
-<button type="button" onclick="showPage('login')">Login</button>
-
+  <h2>Create Account</h2>
+  <input id="su_name" type="text" placeholder="Name">
+  <input id="su_email" type="email" placeholder="Email">
+  <input id="su_pass" type="password" placeholder="Password">
+  <button type="button" onclick="signup(event)">Create Account</button>
+  <p>Already have account?</p>
+  <button type="button" onclick="showPage('login')">Login</button>
 </div>
-
 
 <!-- DASHBOARD -->
-
 <div class="container page" id="dashboard">
+  <h2>Dashboard</h2>
+  <button type="button" onclick="showPage('register')">Register Missing Child</button>
+  <button type="button" onclick="showPage('crosscheck')">Cross Check Photo</button>
 
-<h2>Dashboard</h2>
-
-<button type="button" onclick="showPage('register')">
-Register Missing Child
-</button>
-
-<button type="button" onclick="showPage('crosscheck')">
-Cross Check Photo
-</button>
-
-<h3>Registered Missing Children</h3>
-
-<div id="childrenContainer"></div>
-
+  <h3>Registered Missing Children</h3>
+  <div id="childrenContainer" class="childrenGrid"></div>
 </div>
-
 
 <!-- REGISTER CHILD -->
-
 <div class="container page" id="register">
-
-<h2>Register Missing Child</h2>
-
-<input id="child_name" type="text" placeholder="Child Name">
-<input id="child_age" type="number" placeholder="Age">
-<input id="child_place" type="text" placeholder="Missing Place and contact info">
-
-<input id="child_photo" type="file">
-
-<button type="button" onclick="registerChild(event)">Submit</button>
-
-<button type="button" onclick="showPage('dashboard')">Back</button>
-
+  <h2>Register Missing Child</h2>
+  <input id="child_name" type="text" placeholder="Child Name">
+  <input id="child_age" type="number" placeholder="Age">
+  <input id="child_place" type="text" placeholder="Missing Place and contact info">
+  <input id="child_photo" type="file">
+  <button type="button" onclick="registerChild(event)">Submit</button>
+  <button type="button" onclick="showPage('dashboard')">Back</button>
 </div>
-
 
 <!-- CROSSCHECK -->
-
 <div class="container page" id="crosscheck">
-
-<h2>Cross Check Photo</h2>
-
-<input id="check_photo" type="file">
-
-<button type="button" onclick="crossCheck(event)">Check</button>
-
-<button type="button" onclick="showPage('dashboard')">Back</button>
-
+  <h2>Cross Check Photo</h2>
+  <input id="check_photo" type="file">
+  <button type="button" onclick="crossCheck(event)">Check</button>
+  <button type="button" onclick="showPage('dashboard')">Back</button>
 </div>
-
 
 <!-- RESULT -->
-
 <div class="container page" id="result">
-
-<h2 id="result_text"></h2>
-
-<div id="family_details"></div>
-
-<button type="button" onclick="showPage('dashboard')">Back</button>
-
+  <h2 id="result_text"></h2>
+  <div id="family_details"></div>
+  <button type="button" onclick="showPage('dashboard')">Back</button>
 </div>
 
-
 <script src="script.js"></script>
-
 </body>
 </html>
