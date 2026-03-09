@@ -1,6 +1,7 @@
 const API = "https://missingchild1.onrender.com";
 
-/* PAGE SWITCH */
+
+/* ---------------- PAGE SWITCH ---------------- */
 
 function showPage(page){
 
@@ -8,16 +9,74 @@ document.querySelectorAll(".page").forEach(p=>{
 p.style.display="none";
 });
 
-document.getElementById(page).style.display="block";
+let current = document.getElementById(page);
+
+current.style.display="block";
+
+current.style.opacity=0;
+
+setTimeout(()=>{
+current.style.opacity=1;
+current.style.transition="0.4s";
+},50);
 
 }
 
 showPage("login");
 
 
-/* SIGNUP */
+/* ---------------- LOADING ---------------- */
+
+function showLoading(btn){
+
+btn.innerHTML="Processing...";
+btn.disabled=true;
+
+}
+
+function hideLoading(btn,text){
+
+btn.innerHTML=text;
+btn.disabled=false;
+
+}
+
+
+/* ---------------- MESSAGE BOX ---------------- */
+
+function showMessage(msg,color="green"){
+
+let box=document.createElement("div");
+
+box.innerText=msg;
+
+box.style.position="fixed";
+box.style.bottom="20px";
+box.style.left="50%";
+box.style.transform="translateX(-50%)";
+
+box.style.background=color;
+box.style.color="white";
+box.style.padding="12px 20px";
+box.style.borderRadius="8px";
+box.style.boxShadow="0px 4px 10px rgba(0,0,0,0.3)";
+
+document.body.appendChild(box);
+
+setTimeout(()=>{
+box.remove();
+},3000);
+
+}
+
+
+/* ---------------- SIGNUP ---------------- */
 
 function signup(){
+
+let btn=event.target;
+
+showLoading(btn);
 
 fetch(API + "/signup",{
 
@@ -40,24 +99,34 @@ password:document.getElementById("su_pass").value
 .then(res=>res.json())
 .then(data=>{
 
-alert(data.message || "Signup Successful");
+hideLoading(btn,"Signup");
+
+showMessage(data.message || "Signup Successful");
 
 showPage("login");
 
 })
 
 .catch(err=>{
-alert("Signup Error");
+
+hideLoading(btn,"Signup");
+
+showMessage("Signup Error","red");
+
 console.log(err);
+
 });
 
 }
 
 
-
-/* LOGIN */
+/* ---------------- LOGIN ---------------- */
 
 function login(){
+
+let btn=event.target;
+
+showLoading(btn);
 
 fetch(API + "/login",{
 
@@ -79,53 +148,49 @@ password:document.getElementById("login_pass").value
 .then(res=>res.json())
 .then(data=>{
 
+hideLoading(btn,"Login");
+
 if(data.status=="success"){
+
+showMessage("Login Successful");
 
 showPage("dashboard");
 
 }else{
 
-alert("Login Failed");
+showMessage("Login Failed","red");
 
 }
 
 })
 
 .catch(err=>{
-alert("Server Error");
+
+hideLoading(btn,"Login");
+
+showMessage("Server Error","red");
+
 console.log(err);
+
 });
 
 }
 
 
-
-/* REGISTER CHILD */
+/* ---------------- REGISTER CHILD ---------------- */
 
 function registerChild(){
 
-let formData = new FormData();
+let btn=event.target;
 
-formData.append(
-"name",
-document.getElementById("child_name").value
-);
+showLoading(btn);
 
-formData.append(
-"age",
-document.getElementById("child_age").value
-);
+let formData=new FormData();
 
-formData.append(
-"place",
-document.getElementById("child_place").value
-);
-
-formData.append(
-"photo",
-document.getElementById("child_photo").files[0]
-);
-
+formData.append("name",document.getElementById("child_name").value);
+formData.append("age",document.getElementById("child_age").value);
+formData.append("place",document.getElementById("child_place").value);
+formData.append("photo",document.getElementById("child_photo").files[0]);
 
 fetch(API + "/register_child",{
 
@@ -137,26 +202,36 @@ body:formData
 .then(res=>res.json())
 .then(data=>{
 
-alert(data.message || "Child Registered");
+hideLoading(btn,"Register Child");
+
+showMessage(data.message || "Child Registered");
 
 showPage("dashboard");
 
 })
 
 .catch(err=>{
-alert("Upload Failed");
+
+hideLoading(btn,"Register Child");
+
+showMessage("Upload Failed","red");
+
 console.log(err);
+
 });
 
 }
 
 
-
-/* CROSS CHECK */
+/* ---------------- CROSS CHECK ---------------- */
 
 function crossCheck(){
 
-let formData = new FormData();
+let btn=event.target;
+
+showLoading(btn);
+
+let formData=new FormData();
 
 formData.append(
 "photo",
@@ -173,11 +248,12 @@ body:formData
 .then(res=>res.json())
 .then(data=>{
 
+hideLoading(btn,"Cross Check");
+
 showPage("result");
 
-if(data.status=="found"){
 
-/* CHECK MATCH TYPE */
+if(data.status=="found"){
 
 if(data.match_type=="age_progression"){
 
@@ -190,8 +266,6 @@ document.getElementById("result_text").innerHTML =
 "MATCH FOUND";
 
 }
-
-/* FAMILY DETAILS */
 
 document.getElementById("family_details").innerHTML =
 
@@ -206,16 +280,15 @@ else if(data.status=="no face"){
 document.getElementById("result_text").innerHTML =
 "NO FACE DETECTED";
 
-document.getElementById("family_details").innerHTML = "";
+document.getElementById("family_details").innerHTML="";
 
 }
 
 else{
 
-document.getElementById("result_text").innerHTML =
-"NOT FOUND";
+document.getElementById("result_text").innerHTML="NOT FOUND";
 
-document.getElementById("family_details").innerHTML = "";
+document.getElementById("family_details").innerHTML="";
 
 }
 
@@ -223,10 +296,35 @@ document.getElementById("family_details").innerHTML = "";
 
 .catch(err=>{
 
-alert("Crosscheck Failed");
+hideLoading(btn,"Cross Check");
+
+showMessage("Crosscheck Failed","red");
 
 console.log(err);
 
 });
+
+}
+
+
+/* ---------------- IMAGE PREVIEW ---------------- */
+
+function previewImage(input,id){
+
+let file=input.files[0];
+
+if(file){
+
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+document.getElementById(id).src=e.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
 
 }
