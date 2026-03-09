@@ -1,4 +1,3 @@
-```javascript
 const API = "https://missingchild1.onrender.com";
 
 
@@ -13,15 +12,6 @@ p.style.display="none";
 let current = document.getElementById(page);
 
 current.style.display="block";
-
-current.style.opacity=0;
-
-setTimeout(()=>{
-current.style.opacity=1;
-current.style.transition="0.4s";
-},50);
-
-/* LOAD CHILDREN WHEN DASHBOARD OPENS */
 
 if(page==="dashboard"){
 loadChildren();
@@ -49,7 +39,7 @@ btn.disabled=false;
 }
 
 
-/* ---------------- MESSAGE BOX ---------------- */
+/* ---------------- MESSAGE ---------------- */
 
 function showMessage(msg,color="green"){
 
@@ -66,22 +56,17 @@ box.style.background=color;
 box.style.color="white";
 box.style.padding="12px 20px";
 box.style.borderRadius="8px";
-box.style.boxShadow="0px 4px 10px rgba(0,0,0,0.3)";
 
 document.body.appendChild(box);
 
-setTimeout(()=>{
-box.remove();
-},3000);
+setTimeout(()=>{box.remove();},3000);
 
 }
 
 
 /* ---------------- SIGNUP ---------------- */
 
-function signup(){
-
-let btn=event.target;
+function signup(btn){
 
 showLoading(btn);
 
@@ -106,7 +91,7 @@ password:document.getElementById("su_pass").value
 .then(res=>res.json())
 .then(data=>{
 
-hideLoading(btn,"Signup");
+hideLoading(btn,"Create Account");
 
 showMessage(data.message || "Signup Successful");
 
@@ -116,7 +101,7 @@ showPage("login");
 
 .catch(err=>{
 
-hideLoading(btn,"Signup");
+hideLoading(btn,"Create Account");
 
 showMessage("Signup Error","red");
 
@@ -129,9 +114,7 @@ console.log(err);
 
 /* ---------------- LOGIN ---------------- */
 
-function login(){
-
-let btn=event.target;
+function login(btn){
 
 showLoading(btn);
 
@@ -186,9 +169,7 @@ console.log(err);
 
 /* ---------------- REGISTER CHILD ---------------- */
 
-function registerChild(){
-
-let btn=event.target;
+function registerChild(btn){
 
 showLoading(btn);
 
@@ -209,7 +190,7 @@ body:formData
 .then(res=>res.json())
 .then(data=>{
 
-hideLoading(btn,"Register Child");
+hideLoading(btn,"Submit");
 
 showMessage(data.message || "Child Registered");
 
@@ -219,7 +200,7 @@ showPage("dashboard");
 
 .catch(err=>{
 
-hideLoading(btn,"Register Child");
+hideLoading(btn,"Submit");
 
 showMessage("Upload Failed","red");
 
@@ -232,9 +213,7 @@ console.log(err);
 
 /* ---------------- CROSS CHECK ---------------- */
 
-function crossCheck(){
-
-let btn=event.target;
+function crossCheck(btn){
 
 showLoading(btn);
 
@@ -255,26 +234,23 @@ body:formData
 .then(res=>res.json())
 .then(data=>{
 
-hideLoading(btn,"Cross Check");
+hideLoading(btn,"Check");
 
 showPage("result");
-
 
 if(data.status=="found"){
 
 if(data.match_type=="age_progression"){
 
-document.getElementById("result_text").innerHTML =
-"AGE PROGRESSION MATCH FOUND";
+document.getElementById("result_text").innerHTML="AGE PROGRESSION MATCH FOUND";
 
 }else{
 
-document.getElementById("result_text").innerHTML =
-"MATCH FOUND";
+document.getElementById("result_text").innerHTML="MATCH FOUND";
 
 }
 
-document.getElementById("family_details").innerHTML =
+document.getElementById("family_details").innerHTML=
 
 "Name: "+data.name+"<br>"+
 "Age: "+data.age+"<br>"+
@@ -284,8 +260,7 @@ document.getElementById("family_details").innerHTML =
 
 else if(data.status=="no face"){
 
-document.getElementById("result_text").innerHTML =
-"NO FACE DETECTED";
+document.getElementById("result_text").innerHTML="NO FACE DETECTED";
 
 document.getElementById("family_details").innerHTML="";
 
@@ -303,7 +278,7 @@ document.getElementById("family_details").innerHTML="";
 
 .catch(err=>{
 
-hideLoading(btn,"Cross Check");
+hideLoading(btn,"Check");
 
 showMessage("Crosscheck Failed","red");
 
@@ -314,7 +289,7 @@ console.log(err);
 }
 
 
-/* ---------------- LOAD REGISTERED CHILDREN ---------------- */
+/* ---------------- LOAD CHILDREN ---------------- */
 
 function loadChildren(){
 
@@ -340,8 +315,7 @@ card.innerHTML=
 
 "<h4>"+child.name+"</h4>"+
 "<p>Age: "+child.age+"</p>"+
-"<p>Place: "+child.place+"</p>"+
-"<img src='"+API+"/"+child.image+"' width='120'>";
+"<p>Place: "+child.place+"</p>";
 
 container.appendChild(card);
 
@@ -356,27 +330,3 @@ console.log("Error loading children",err);
 });
 
 }
-
-
-/* ---------------- IMAGE PREVIEW ---------------- */
-
-function previewImage(input,id){
-
-let file=input.files[0];
-
-if(file){
-
-let reader=new FileReader();
-
-reader.onload=function(e){
-
-document.getElementById(id).src=e.target.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-}
-```
