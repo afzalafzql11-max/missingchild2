@@ -1,14 +1,15 @@
-/* BODY */
+```css
+/* ================= BODY ================= */
 
 body{
 
 font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-background: linear-gradient(-45deg,#6a11cb,#2575fc,#00c6ff,#7b2ff7);
+background: linear-gradient(-45deg,#6a11cb,#2575fc,#00c6ff,#7b2ff7,#ff6a00);
 
 background-size:400% 400%;
 
-animation:gradientMove 12s ease infinite;
+animation:gradientMove 14s ease infinite;
 
 text-align:center;
 
@@ -22,12 +23,14 @@ justify-content:center;
 
 align-items:center;
 
-overflow:hidden;
+overflow-x:hidden;
+
+color:white;
 
 }
 
 
-/* BACKGROUND ANIMATION */
+/* ================= BACKGROUND ANIMATION ================= */
 
 @keyframes gradientMove{
 
@@ -38,7 +41,7 @@ overflow:hidden;
 }
 
 
-/* TITLE */
+/* ================= TITLE ================= */
 
 .title{
 
@@ -50,21 +53,23 @@ width:100%;
 
 padding:20px;
 
-font-size:30px;
+font-size:32px;
 
 font-weight:bold;
 
-letter-spacing:2px;
+letter-spacing:3px;
 
 color:white;
 
-background:rgba(0,0,0,0.25);
+background:rgba(0,0,0,0.35);
 
-backdrop-filter:blur(10px);
+backdrop-filter:blur(15px);
 
-box-shadow:0 4px 20px rgba(0,0,0,0.4);
+box-shadow:0 4px 30px rgba(0,0,0,0.4);
 
 animation:titleGlow 3s infinite alternate;
+
+z-index:10;
 
 }
 
@@ -81,64 +86,67 @@ text-shadow:0 0 10px #fff,0 0 20px #2575fc;
 
 to{
 
-text-shadow:0 0 20px #fff,0 0 40px #7b2ff7;
+text-shadow:0 0 20px #fff,0 0 50px #7b2ff7;
 
 }
 
 }
 
 
-/* MAIN CARD */
+/* ================= MAIN CARD ================= */
 
 .container{
 
-width:420px;
+width:430px;
 
 padding:35px;
 
-background:rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.12);
 
-border-radius:20px;
+border-radius:22px;
 
-backdrop-filter:blur(15px);
+backdrop-filter:blur(18px);
 
 box-shadow:
 
-0 10px 40px rgba(0,0,0,0.4),
+0 15px 50px rgba(0,0,0,0.5),
 
-inset 0 0 20px rgba(255,255,255,0.2);
+inset 0 0 25px rgba(255,255,255,0.2);
 
 animation:cardAppear 0.8s ease;
 
 transition:0.4s;
 
+overflow-y:auto;
+
+max-height:80vh;
+
 }
+
 
 .container:hover{
 
-transform:translateY(-5px) scale(1.02);
+transform:translateY(-6px) scale(1.02);
 
-box-shadow:0 20px 50px rgba(0,0,0,0.5);
+box-shadow:0 25px 70px rgba(0,0,0,0.6);
 
 }
 
 
-/* CARD ANIMATION */
+/* ================= CARD ANIMATION ================= */
 
 @keyframes cardAppear{
 
 from{
 
 opacity:0;
-
-transform:translateY(40px);
+transform:translateY(50px);
 
 }
 
 to{
 
 opacity:1;
-
 transform:translateY(0px);
 
 }
@@ -146,7 +154,7 @@ transform:translateY(0px);
 }
 
 
-/* INPUT FIELDS */
+/* ================= INPUT FIELDS ================= */
 
 input{
 
@@ -156,21 +164,22 @@ padding:14px;
 
 margin:12px;
 
-border-radius:10px;
+border-radius:12px;
 
 border:none;
 
 outline:none;
 
-background:rgba(255,255,255,0.85);
+background:rgba(255,255,255,0.9);
 
 font-size:15px;
 
 transition:0.3s;
 
-box-shadow:0 3px 10px rgba(0,0,0,0.2);
+box-shadow:0 4px 15px rgba(0,0,0,0.3);
 
 }
+
 
 input:focus{
 
@@ -180,14 +189,13 @@ transform:scale(1.03);
 
 box-shadow:
 
-0 0 10px #2575fc,
-
-0 0 20px #7b2ff7;
+0 0 15px #2575fc,
+0 0 25px #7b2ff7;
 
 }
 
 
-/* BUTTON */
+/* ================= BUTTON ================= */
 
 button{
 
@@ -203,7 +211,7 @@ color:white;
 
 border:none;
 
-border-radius:10px;
+border-radius:12px;
 
 font-size:16px;
 
@@ -213,7 +221,7 @@ cursor:pointer;
 
 transition:0.3s;
 
-box-shadow:0 5px 15px rgba(0,0,0,0.3);
+box-shadow:0 6px 20px rgba(0,0,0,0.35);
 
 position:relative;
 
@@ -239,18 +247,13 @@ width:100%;
 height:100%;
 
 background:linear-gradient(
-
 120deg,
-
 transparent,
-
 rgba(255,255,255,0.6),
-
 transparent
-
 );
 
-transition:0.5s;
+transition:0.6s;
 
 }
 
@@ -262,27 +265,90 @@ left:100%;
 
 button:hover{
 
-transform:scale(1.07);
+transform:scale(1.08);
 
 box-shadow:
 
-0 0 15px #2575fc,
-
-0 0 30px #7b2ff7;
+0 0 20px #2575fc,
+0 0 40px #7b2ff7;
 
 }
 
 
-/* PAGE SWITCH */
+/* ================= PAGE SWITCH ================= */
 
 .page{
 
 display:none;
 
+animation:fadePage 0.5s ease;
+
+}
+
+@keyframes fadePage{
+
+from{opacity:0;}
+to{opacity:1;}
+
 }
 
 
-/* IMAGE PREVIEW */
+/* ================= CHILD DASHBOARD CARDS ================= */
+
+#childrenContainer{
+
+margin-top:20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.childCard{
+
+background:rgba(255,255,255,0.2);
+
+border-radius:15px;
+
+padding:15px;
+
+backdrop-filter:blur(10px);
+
+box-shadow:0 6px 25px rgba(0,0,0,0.4);
+
+transition:0.4s;
+
+}
+
+.childCard:hover{
+
+transform:scale(1.04);
+
+box-shadow:0 10px 40px rgba(0,0,0,0.6);
+
+}
+
+.childCard h4{
+
+margin:5px 0;
+
+font-size:20px;
+
+}
+
+.childCard p{
+
+margin:3px 0;
+
+font-size:14px;
+
+}
+
+
+/* ================= IMAGE ================= */
 
 img{
 
@@ -290,9 +356,11 @@ margin-top:10px;
 
 border-radius:10px;
 
-box-shadow:0 5px 20px rgba(0,0,0,0.4);
+box-shadow:0 6px 25px rgba(0,0,0,0.5);
 
 transition:0.3s;
+
+max-width:140px;
 
 }
 
@@ -303,7 +371,24 @@ transform:scale(1.1);
 }
 
 
-/* MOBILE */
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar{
+
+width:6px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#7b2ff7;
+
+border-radius:10px;
+
+}
+
+
+/* ================= MOBILE ================= */
 
 @media (max-width:500px){
 
@@ -321,4 +406,11 @@ font-size:22px;
 
 }
 
+button{
+
+font-size:15px;
+
 }
+
+}
+```
