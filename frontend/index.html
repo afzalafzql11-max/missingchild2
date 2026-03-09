@@ -24,11 +24,11 @@
 <input id="login_email" type="email" placeholder="Email">
 <input id="login_pass" type="password" placeholder="Password">
 
-<button onclick="login()">Login</button>
+<button type="button" onclick="login(event)">Login</button>
 
 <p>No account?</p>
 
-<button onclick="showPage('signup')">Signup</button>
+<button type="button" onclick="showPage('signup')">Signup</button>
 
 </div>
 
@@ -43,11 +43,11 @@
 <input id="su_email" type="email" placeholder="Email">
 <input id="su_pass" type="password" placeholder="Password">
 
-<button onclick="signup()">Create Account</button>
+<button type="button" onclick="signup(event)">Create Account</button>
 
 <p>Already have account?</p>
 
-<button onclick="showPage('login')">Login</button>
+<button type="button" onclick="showPage('login')">Login</button>
 
 </div>
 
@@ -58,15 +58,14 @@
 
 <h2>Dashboard</h2>
 
-<button onclick="showPage('register')">
+<button type="button" onclick="showPage('register')">
 Register Missing Child
 </button>
 
-<button onclick="showPage('crosscheck')">
+<button type="button" onclick="showPage('crosscheck')">
 Cross Check Photo
 </button>
 
-<!-- NEW SECTION -->
 <h3>Registered Missing Children</h3>
 
 <div id="childrenContainer"></div>
@@ -86,9 +85,9 @@ Cross Check Photo
 
 <input id="child_photo" type="file">
 
-<button onclick="registerChild()">Submit</button>
+<button type="button" onclick="registerChild(event)">Submit</button>
 
-<button onclick="showPage('dashboard')">Back</button>
+<button type="button" onclick="showPage('dashboard')">Back</button>
 
 </div>
 
@@ -101,9 +100,9 @@ Cross Check Photo
 
 <input id="check_photo" type="file">
 
-<button onclick="crossCheck()">Check</button>
+<button type="button" onclick="crossCheck(event)">Check</button>
 
-<button onclick="showPage('dashboard')">Back</button>
+<button type="button" onclick="showPage('dashboard')">Back</button>
 
 </div>
 
@@ -116,7 +115,7 @@ Cross Check Photo
 
 <div id="family_details"></div>
 
-<button onclick="showPage('dashboard')">Back</button>
+<button type="button" onclick="showPage('dashboard')">Back</button>
 
 </div>
 
